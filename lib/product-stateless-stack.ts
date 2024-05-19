@@ -56,7 +56,7 @@ export class ProductStatelessStack extends cdk.Stack {
 
     // Create the blue green deployment as a 10% percent canary over 5 minutes.
     const createProductAlias = createProductLambda.asBlueGreenDeployment(
-      LambdaDeploymentConfig.CANARY_10PERCENT_15MINUTES
+      LambdaDeploymentConfig.LINEAR_10PERCENT_EVERY_1MINUTE
     );
 
     props.productTable.grantReadWriteData(createProductLambda);
