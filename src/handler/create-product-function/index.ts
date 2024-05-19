@@ -25,6 +25,7 @@ export const createProductHandler: Handler<NewProduct, IProduct> = async (
   event
 ) => {
   // throw Error("test error");
+  // this is version: 4
   try {
     logger.info("Received create product request", { product: event.body });
     metrics.addMetric(CREATE_PRODUCT_API_CALL, MetricUnits.Count, 1);

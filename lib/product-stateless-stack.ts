@@ -42,29 +42,53 @@ export class ProductStatelessStack extends cdk.Stack {
     });
 
     // Create the create product lambda
-    const createProductLambda = Lambda.create(this, "CreateCityProduct", {
+    // const createProductLambda = Lambda.create(this, "CreateCityProduct", {
+    //   entry: path.join(
+    //     __dirname,
+    //     "../src/handler/create-product-function/index.ts"
+    //   ),
+    //   description: "Create a product with change - alias is live-1",
+    //   serviceName: "createCityProduct",
+    //   environment: {
+    //     TABLE_NAME: props.productTable.tableName,
+    //   },
+    // });
+
+
+    const createVersionLambda = Lambda.create(this, "GetLambdaVersion", {
       entry: path.join(
         __dirname,
-        "../src/handler/create-product-function/index.ts"
+        "../src/handler/get-lambda-version/index.ts"
       ),
       description: "Create a product with change - alias is live-1",
-      serviceName: "createCityProduct",
+      serviceName: "getLambdaVersion",
       environment: {
-        TABLE_NAME: props.productTable.tableName,
+        
       },
     });
 
+
     // Create the blue green deployment as a 10% percent canary over 5 minutes.
-    const createProductAlias = createProductLambda.asBlueGreenDeployment(
+    // const createProductAlias = createProductLambda.asBlueGreenDeployment(
+    //   LambdaDeploymentConfig.LINEAR_10PERCENT_EVERY_1MINUTE
+    // );
+
+    const getVersionAlias = createVersionLambda.asBlueGreenDeployment(
       LambdaDeploymentConfig.LINEAR_10PERCENT_EVERY_1MINUTE
     );
 
-    props.productTable.grantReadWriteData(createProductLambda);
+    // props.productTable.grantReadWriteData(createProductLambda);
+
+    // productApi.addEndpoint({
+    //   resourcePath: "/product",
+    //   method: HttpMethod.POST,
+    //   function: createProductAlias,
+    // });
 
     productApi.addEndpoint({
-      resourcePath: "/product",
-      method: HttpMethod.POST,
-      function: createProductAlias,
+      resourcePath: "/version",
+      method: HttpMethod.GET,
+      function: getVersionAlias,
     });
   }
 }
