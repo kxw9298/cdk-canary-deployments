@@ -30,7 +30,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-: us-east-1
 
       - name: Run AWS CDK plan (diff)
         env:
@@ -71,7 +71,7 @@ jobs:
         env:
           ENVIRONMENT: dev
           ACCOUNT: development
-          REGION: us-east-1s
+          REGION: us-east-1
           DOMAIN: product
           STAGE: dev
           COMMIT_ID: ${{ env.COMMIT_ID }}
