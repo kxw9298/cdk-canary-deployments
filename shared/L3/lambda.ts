@@ -24,7 +24,6 @@ import {
 import { Deployable } from "../types/deployable";
 import packageJson from "../../package.json";
 
-
 /**
  * ILambdaProps provides all properties required to create a City Lambda.
  * @extends {NodejsFunctionProps}
@@ -177,17 +176,4 @@ export class Lambda extends NodejsFunction implements Deployable {
     });
     return alias;
   }
-
-  // Function to clean up old aliases
-  async cleanupOldAliases(functionName: string) {
-    const lambdaClient = new AWS.Lambda();
-    const aliases = await lambdaClient.listAliases({ FunctionName: functionName }).promise();
-    if (aliases.Aliases.length >= 50) {
-      const aliasesToDelete = aliases.Aliases.slice(0, aliases.Aliases.length - 49); // Keep the latest 49 aliases
-      for (const alias of aliasesToDelete) {
-        await lambdaClient.deleteAlias({ FunctionName: functionName, Name: alias.Name }).promise();
-      }
-    }
-  }
-}
 }
