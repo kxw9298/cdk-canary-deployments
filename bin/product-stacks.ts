@@ -6,11 +6,11 @@ import { ProductStatelessStack } from "../lib/product-stateless-stack";
 
 const productIdIndexName = "productById";
 const app = new cdk.App();
-const statefulStack = new ProductStatefulStack(app, "ProductStatefulStack", {
-  productIdIndexName,
-});
+// const statefulStack = new ProductStatefulStack(app, "ProductStatefulStack", {
+//   productIdIndexName,
+// });
 new ProductStatelessStack(app, "ProductStatelessStack", {
-  productIdIndexName,
-  productTable: statefulStack.productTable,
+  // productIdIndexName,
+  // productTable: statefulStack.productTable,
   // productBucket: statefulStack.productBucket,
 });

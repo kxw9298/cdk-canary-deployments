@@ -30,7 +30,7 @@ export class ProductStatelessStack extends cdk.Stack {
    * @param {string} id
    * @param {ProductStatefulStackProps} props
    */
-  constructor(scope: Construct, id: string, props: ProductStatelessStackProps) {
+  constructor(scope: Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props);
 
     // Create the API.
