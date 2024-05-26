@@ -154,14 +154,14 @@ export class Lambda extends NodejsFunction implements Deployable {
     });
 
     // Access the commit ID from context
-    const commitId = this.node.tryGetContext('commitId');
+    // const commitId = this.node.tryGetContext('commitId');
 
-    if (commitId) {
-      new Alias(this, `Alias-${commitId}`, {
-        aliasName: `commit-${commitId}`,
-        version: newVersion,
-      });
-    }
+    // if (commitId) {
+    //   new Alias(this, `Alias-${commitId}`, {
+    //     aliasName: `commit-${commitId}`,
+    //     version: newVersion,
+    //   });
+    // }
 
     const failureAlarm = new Alarm(this, "DeploymentAlarm", {
       metric: alias.metricErrors(),
