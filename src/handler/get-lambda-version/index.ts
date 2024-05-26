@@ -19,7 +19,7 @@ export const getApiVersionHandler: Handler<null, { version: string }> = async (
   event
 ) => {
   try {
-    logger.info("this is version: 8");
+    logger.info("this is version: 9");
     logger.info("Received get API version request");
     metrics.addMetric(GET_API_VERSION_CALL, MetricUnits.Count, 1);
     const version = process.env.AWS_LAMBDA_FUNCTION_VERSION || "unknown";
