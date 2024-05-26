@@ -113,6 +113,7 @@ export class Lambda extends NodejsFunction implements Deployable {
    * @returns {PublicLambda} A new instance of PublicLambda.
    */
   static create(scope: Construct, id: string, props: ILambdaProps): Lambda {
+    const commitId = scope.node.tryGetContext('commitId') || 'undefined';
     const lambda = new Lambda(scope, id, {
       ...props,
       ...defaultProps,
@@ -121,6 +122,7 @@ export class Lambda extends NodejsFunction implements Deployable {
         ...(props.environment ?? {}),
         ...fixedProps.environment,
         POWERTOOLS_METRICS_NAMESPACE: props.serviceName,
+        COMMIT_ID: commitId,
       },
       functionName: namingUtils.createResourceName(
         props.serviceName,
