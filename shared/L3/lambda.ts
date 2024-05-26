@@ -121,6 +121,7 @@ export class Lambda extends NodejsFunction implements Deployable {
         ...(props.environment ?? {}),
         ...fixedProps.environment,
         POWERTOOLS_METRICS_NAMESPACE: props.serviceName,
+        CommitID: this.node.tryGetContext('commitId'),
       },
       functionName: namingUtils.createResourceName(
         props.serviceName,
